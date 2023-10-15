@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+h1 {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+form {
+    text-align: center;
+    margin: 20px;
+}
+
+input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+h2 {
+    margin: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.pagination a {
+    color: #007BFF;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 0 5px;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    background-color: #007BFF;
+    color: #FFFFFF;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+}
+
+.filter-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.filter-form label {
+    margin-right: 10px;
+}
+
+.filter-form select,
+.filter-form input[type="text"],
+.filter-form button {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.filter-form select {
+    width: 120px;
+}
+
+.filter-form input[type="text"] {
+    width: 200px;
+}
+
+.filter-form button {
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.filter-form button:hover {
+    background-color: #0056b3;
+}

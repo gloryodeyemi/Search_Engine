@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Academic Papers Search</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+</head>
+<body>
+    <h1>Academic Papers Search</h1>
+    <form method="GET" action="/" id="search-form">
+        <input id="search-input" type="text" name="query" value="{{ query }}" placeholder="Search for academic papers">
+        <button type="submit">Search</button>
+        <button id="voice-search-btn" type="button">Voice Search</button>
+    </form>
+
+<!--    <button><a href="/all_papers" style="text-decoration: none; color: white;">Show all Academic Papers</a></button>-->
+    <form class="filter-form" method="GET" action="/filter_results">
+        <div>
+            <label for="filter_type">Filter by:</label>
+            <select name="filter_type" id="filter_type">
+                <option value="all_papers">All papers</option>
+                <option value="year">Year</option>
+                <option value="year_range">Year range</option>
+                <option value="paper_type">Paper type</option>
+            </select>
+        </div>
+        <div id="filter-value-container">
+            <label for="filter_value_input" style="display: none;">Filter value:</label>
+            <input type="text" id="filter_value_input" name="filter_value" placeholder="Enter filter value" style="display: none;">
+        </div>
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if query %}
+    <h2>Search Results for "{{ query }}"</h2>
+    <ul>
+        <!-- Render your search results here -->
+        {% for paper in papers %}
+            <li>
+                <strong>Title:</strong> {{ paper.title }}<br>
+                <strong>Authors:</strong> {{ paper.authors }}<br>
+                <strong>Year:</strong> {{ paper.year }}<br>
+                <strong>Type:</strong> {{ paper.type }}<br>
+<!--                <a href="{{ paper.url }}" target="_blank">Read Paper</a>-->
+                {% if paper.url == "URL not available" %}
+                    <p>No URL available for this paper</p>
+                {% elif "http" not in paper.url %}
+                    <strong>Path:</strong> {{ paper.url }}<br>
+                {% else %}
+                    <a href="{{ paper.url }}" target="_blank">Read Paper</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if filter_results %}
+    <h2>Academic papers for "{{ filter_value }}"</h2>
+    <ul>
+        <!-- Render your filtered results here -->
+        {% for item in filtered_papers %}
+            <li>
+                <strong>Title:</strong> {{ item.title }}<br>
+                <strong>Authors:</strong> {{ item.authors }}<br>
+                <strong>Year:</strong> {{ item.year }}<br>
+                <strong>Type:</strong> {{ item.type }}<br>
+
+                {% if item.url == "URL not available" %}
+                    <p>No URL available for this paper</p>
+                {% elif "http" not in item.url %}
+                    <strong>Path:</strong> {{ item.url }}<br>
+                {% else %}
+                    <a href="{{ item.url }}" target="_blank">Read Paper</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if show_alphabets %}
+    <h2>All Academic Papers</h2>
+    <!-- Render all the alphabets here -->
+    <ul>
+        <li>
+            {% for letter in alphabets %}
+            <a href="/titles/{{ letter }}">{{ letter }}</a>{% if not loop.last %} | {% endif %}
+            {% endfor %}
+        </li>
+    </ul>
+    {% endif %}
+
+    {% if show_titles %}
+        <h2>All Academic Papers for {{ selected_alphabet }}</h2>
+        <ul>
+            <!-- Render the titles here -->
+            {% for title in titles %}
+                <li><a href="/paper_details/{{ title }}"> {{ title }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <!-- Pagination links -->
+        <div class="pagination">
+            {% if has_prev %}
+                <a href="?page={{ prev_page }}">Previous</a>
+            {% endif %}
+
+            {% for page_num in page_range %}
+                {% if page_num == current_page %}
+                    <strong>{{ page_num }}</strong>
+                {% else %}
+                    <a href="?page={{ page_num }}">{{ page_num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if has_next %}
+                <a href="?page={{ next_page }}">Next</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if show_paper_details %}
+    <h2>Full Information</h2>
+    <!-- Render the full information here -->
+    <ul>
+        <li>
+            <p><strong>Title:</strong> {{ paper_details.title }}</p>
+            <p><strong>Authors:</strong> {{ paper_details.authors }}</p>
+            <p><strong>Year:</strong> {{ paper_details.year }}</p>
+            <p><strong>Type:</strong> {{ paper_details.type }}</p>
+
+            {% if paper_details.url == "URL not available" %}
+                <p>No URL available for this paper</p>
+            {% elif "http" not in paper_details.url %}
+                <strong>Path:</strong> {{ paper_details.url }}<br>
+            {% else %}
+                <a href="{{ paper_details.url }}" target="_blank">Read Paper</a>
+            {% endif %}
+        </li>
+    </ul>
+
+    {% endif %}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
