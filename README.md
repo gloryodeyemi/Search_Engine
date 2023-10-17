@@ -26,7 +26,7 @@ application to render the search result on the web page.
 
 ## Guideline
 Run the [data_parser.py](https://github.com/gloryodeyemi/Search_Engine/blob/main/data_parser.py) file first to create an 
-index directory for the academic papers or skip this process and use the index directory already created. You can find 
+index directory for the academic papers, or skip this process and use the index directory already created. You can find 
 the index directory [here](https://drive.google.com/file/d/1hos03WxYXfzqRpQL9_ceP8_ioeScxGfr/view?usp=sharing).
 
 ## Authors
