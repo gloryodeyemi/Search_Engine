@@ -16,7 +16,6 @@
         <button id="voice-search-btn" type="button">Voice Search</button>
     </form>
 
-<!--    <button><a href="/all_papers" style="text-decoration: none; color: white;">Show all Academic Papers</a></button>-->
     <form class="filter-form" method="GET" action="/filter_results">
         <div>
             <label for="filter_type">Filter by:</label>
@@ -37,14 +36,13 @@
     {% if query %}
     <h2>Search Results for "{{ query }}"</h2>
     <ul>
-        <!-- Render your search results here -->
+        <!-- render the search results here -->
         {% for paper in papers %}
             <li>
                 <strong>Title:</strong> {{ paper.title }}<br>
                 <strong>Authors:</strong> {{ paper.authors }}<br>
                 <strong>Year:</strong> {{ paper.year }}<br>
                 <strong>Type:</strong> {{ paper.type }}<br>
-<!--                <a href="{{ paper.url }}" target="_blank">Read Paper</a>-->
                 {% if paper.url == "URL not available" %}
                     <p>No URL available for this paper</p>
                 {% elif "http" not in paper.url %}
@@ -60,7 +58,7 @@
     {% if filter_results %}
     <h2>Academic papers for "{{ filter_value }}"</h2>
     <ul>
-        <!-- Render your filtered results here -->
+        <!-- render the filtered results here -->
         {% for item in filtered_papers %}
             <li>
                 <strong>Title:</strong> {{ item.title }}<br>
@@ -82,7 +80,7 @@
 
     {% if show_alphabets %}
     <h2>All Academic Papers</h2>
-    <!-- Render all the alphabets here -->
+    <!-- render all the alphabets here -->
     <ul>
         <li>
             {% for letter in alphabets %}
@@ -95,13 +93,13 @@
     {% if show_titles %}
         <h2>All Academic Papers for {{ selected_alphabet }}</h2>
         <ul>
-            <!-- Render the titles here -->
+            <!-- render the titles here -->
             {% for title in titles %}
                 <li><a href="/paper_details/{{ title }}"> {{ title }}</a></li>
             {% endfor %}
         </ul>
 
-        <!-- Pagination links -->
+        <!-- pagination links -->
         <div class="pagination">
             {% if has_prev %}
                 <a href="?page={{ prev_page }}">Previous</a>
@@ -123,7 +121,7 @@
 
     {% if show_paper_details %}
     <h2>Full Information</h2>
-    <!-- Render the full information here -->
+    <!-- render the full information here -->
     <ul>
         <li>
             <p><strong>Title:</strong> {{ paper_details.title }}</p>

@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, jsonify, url_for
 import string
 import logic
 
-# Initialize a Flask application
+# initialize a Flask application
 app = Flask(__name__)
 
 
@@ -30,12 +30,12 @@ def show_alphabets():
 
 @app.route('/titles/<alphabet>')
 def show_titles(alphabet):
-    # Logic to fetch titles starting with the specified alphabet
-    selected_alphabet = request.args.get('alphabet', alphabet)  # Get the selected alphabet
-    current_page = int(request.args.get('page', '1'))  # Get the page number
+    # logic to fetch titles starting with the specified alphabet
+    selected_alphabet = request.args.get('alphabet', alphabet)  # get the selected alphabet
+    current_page = int(request.args.get('page', '1'))  # get the page number
     titles, total_pages = logic.get_titles_by_alphabet_with_pagination(selected_alphabet, current_page)
 
-    # Calculate the page range to display in the pagination
+    # calculate the page range to display in the pagination
     max_pages = 10
     page_range = range(1, min(total_pages, max_pages) + 1)
     # page_range = range(1, total_pages + 1)
@@ -50,12 +50,12 @@ def show_titles(alphabet):
 
 @app.route('/paper_details/<title>')
 def show_paper_details(title):
-    # Logic for fetching and rendering paper details
+    # logic for fetching and rendering paper details
     paper_details = logic.get_paper_details(title)
     return render_template('index.html', show_paper_details=True, paper_details=paper_details)
 
 
-# Endpoint for handling filtering requests
+# endpoint for handling filtering requests
 @app.route('/filter_results', methods=['GET', 'POST'])
 def filter_results():
     filter_type = request.args.get('filter_type')
@@ -63,7 +63,7 @@ def filter_results():
     filtered_papers = []
     limit = 25
 
-    # Logic to fetch filtered results based on the selected filter type and value
+    # logic to fetch filtered results based on the selected filter type and value
     if filter_type == 'all_papers':
         alphabets = list(string.ascii_uppercase)
         return render_template('index.html', show_alphabets=True, alphabets=alphabets)
@@ -75,7 +75,7 @@ def filter_results():
     elif filter_type == 'paper_type':
         filtered_papers = logic.get_papers_by_type(filter_value, limit)
 
-    # Render the filtered titles in the index template
+    # render the filtered titles in the index template
     return render_template('index.html', filter_results=True, filtered_papers=filtered_papers,
                            filter_value=filter_value)
 
