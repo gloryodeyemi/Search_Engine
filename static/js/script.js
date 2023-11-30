@@ -10,7 +10,7 @@ $(function () {
                 }
             });
         },
-        minLength: 2, // Minimum characters before the autocomplete activates
+        minLength: 2, // minimum characters before the autocomplete activates
     });
 });
 
@@ -29,7 +29,6 @@ document.getElementById('filter_type').addEventListener('change', function () {
 
 var voiceSearchButton = document.getElementById('voice-search-btn');
 var searchInput = document.getElementById('search-input');
-//var searchForm = document.getElementById('search-form');
 
 voiceSearchButton.addEventListener('click', function(event) {
     event.preventDefault();
@@ -56,8 +55,8 @@ function startDictation() {
 
         recognition.onstart = function() {
             console.log("Recognition started.");
-            voiceSearchButton.style.backgroundColor = "#ff0000"; // Red color to indicate active listening
-            voiceSearchButton.innerHTML = "Listening..."; // Change the button text to indicate active listening
+            voiceSearchButton.style.backgroundColor = "#ff0000"; // red color to indicate active listening
+            voiceSearchButton.innerHTML = "Listening..."; // change the button text to indicate active listening
         };
 
         recognition.onresult = function(event) {
@@ -80,7 +79,7 @@ function startDictation() {
             recognition.stop();
         };
 
-        // Code for the start button
+        // code for the start button
         recognition.lang = "en-US";
         recognition.start();
     }
